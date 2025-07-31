@@ -1,0 +1,12 @@
+[submodule "infra"]
+	path = infra
+	url = https://github.com/TRACKIO-DELIVERY/infra.git
+[submodule "tracking-service"]
+	path = tracking-service
+	url = https://github.com/TRACKIO-DELIVERY/tracking-service.git
+[submodule "message-broker"]
+	path = message-broker
+	url = https://github.com/TRACKIO-DELIVERY/message-broker.git
+[submodule "order-service"]
+	path = order-service
+	url = https://github.com/TRACKIO-DELIVERY/order-service
