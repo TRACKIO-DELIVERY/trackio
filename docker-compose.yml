@@ -15,7 +15,7 @@ services:
     env_file:
       - .env
     environment:
-      KONG_DATABASE: off
+      KONG_DATABASE: "off"
       KONG_PROXY_ACCESS_LOG: /dev/stdout
       KONG_ADMIN_ACCESS_LOG: /dev/stdout
       KONG_PROXY_ERROR_LOG: /dev/stderr
