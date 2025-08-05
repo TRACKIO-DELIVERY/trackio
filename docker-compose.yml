@@ -44,6 +44,7 @@ services:
       - "9090:9090"
     networks:
       - api_gateway
+      - rabbitmq_net
   
   grafana:
     image: grafana/grafana:latest
@@ -92,6 +93,7 @@ services:
     ports:
       - "15672:15672" # RabbitMQ Management UI
       - "5672:5672" # RabbitMQ AMQP protocol
+      - "15692:15692" 
     volumes:
       - rabbitmq_data:/var/lib/rabbitmq
       - ./message-broker/rabbitmq:/config
