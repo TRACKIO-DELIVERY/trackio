@@ -1,0 +1,31 @@
+name: Deploy to Production
+
+on:
+  repository_dispatch:
+      types: [order-service-updated, tracking-service-updated ,message-broker-updated, infra-updated]
+
+  workflow_dispatch:
+
+
+jobs:
+  deploy:
+      runs-on: ubuntu-latest
+      steps:
+          - name : Checkout repository
+            uses: actions/checkout@v2
+      
+          - name: Git Submodule Update
+            run: |
+              git pull --recurse-submodules
+              git submodule update --remote --recursive
+
+          - name: Set up Docker Buildx
+            uses: docker/setup-buildx-action@v2
+            
+          - name: Build modules
+            uses: docker/bake-action@v6
+            with:
+              push: true
+              load: false
+              files: docker-compose.yml
+              targets: order-server, tracking-server, message-broker, infra
