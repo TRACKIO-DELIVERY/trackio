@@ -57,10 +57,11 @@ jobs:
 
       - name: SSH into EC2 and main repo and submodules
         run: |
-          ssh -i private-key.pem -o StrictHostKeyChecking=no ubuntu@ec2-56-125-1-179.sa-east-1.compute.amazonaws.com << 'EOF'
+          ssh -i private-key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << 'EOF'
             set -e
             cd ~/trackio_deploy
             git pull origin main
             git submodule update --init --recursive --force
             echo "Código e submódulos atualizados com sucesso!"
+            docker-compose -f docker-compose.yml down && docker-compose -f docker-compose.yml up -d --build
           EOF
