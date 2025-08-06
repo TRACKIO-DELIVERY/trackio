@@ -122,7 +122,13 @@ services:
       - .env
     networks:
       - api_gateway
-      
+
+  mailpit:
+    image: docker.io/axllent/mailpit:latest
+    container_name: order_service_local_mailpit
+    ports:
+      - "8025:8025"
+
   django: &django
     build:
       context: order-service
