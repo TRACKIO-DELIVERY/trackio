@@ -16,7 +16,6 @@ jobs:
   
       - name: Git Submodule Update
         run: |
-          git pull --recurse-submodules
           git submodule update --remote --recursive
 
       - name: Set up Docker Buildx
@@ -36,12 +35,16 @@ jobs:
         run: |
           git config --global user.name "Bot action"
           git config --global user.email "mirlaisabel11@gmail.com"
-        
-      - name: Commit e Push
+          
+      - name: Commit e Push (if needed)
         run: |
-          git add .
-          git commit -m "Deploy(${{ github.sha }}): Update submodules"
-          git push origin main
+          if ! git diff --quiet --exit-code; then
+            git add .
+            git commit -m "Deploy(${{ github.sha }}): Update submodules"
+            git push origin main
+          else
+            echo "No submodule updates to commit."
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
               
