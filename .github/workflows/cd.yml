@@ -21,7 +21,10 @@ jobs:
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
-        
+      
+      - name: Copy .env template for build
+        run: cp .env.template .env
+      
       - name: Build modules
         uses: docker/bake-action@v6
         with:
@@ -29,7 +32,7 @@ jobs:
           load: false
           files: docker-compose.yml
           targets: order-server, tracking-server, message-broker, infra
-      
+        
       - name: Configurar Git
         run: |
           git config --global user.name "Bot action"
@@ -60,6 +63,10 @@ jobs:
           ssh -i private-key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << 'EOF'
             set -e
             cd ~/trackio_deploy
+
+            echo "${{ secrets.ENV_FILE }}" > .env
+            echo "Arquivo .env criado com sucesso"
+
             git pull origin main
             git submodule update --init --recursive --force
             echo "Código e submódulos atualizados com sucesso!"
