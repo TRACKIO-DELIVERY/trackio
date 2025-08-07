@@ -28,11 +28,10 @@ jobs:
       - name: Build modules
         uses: docker/bake-action@v6
         with:
-          push: true
-          load: false
+          push: false
+          load: true
           files: docker-compose.yml
-          targets: order-server, tracking-server, message-broker, infra
-        
+
       - name: Configurar Git
         run: |
           git config --global user.name "Bot action"
