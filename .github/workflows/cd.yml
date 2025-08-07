@@ -31,7 +31,6 @@ jobs:
           push: true
           load: false
           files: docker-compose.yml
-          targets: order-server, tracking-server, message-broker, infra
         
       - name: Configurar Git
         run: |
