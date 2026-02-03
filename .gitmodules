@@ -4,7 +4,7 @@
     branch = main
 [submodule "tracking-service"]
     path = tracking-service
-    url = https://github.com/TRACKIO-DELIVERY/tracking-service.git
+    url = https://github.com/TRACKIO-DELIVERY/tracking-socket-server.git
     branch = main
 [submodule "order-service"]
     path = order-service
