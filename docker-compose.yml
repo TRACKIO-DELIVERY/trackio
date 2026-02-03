@@ -20,8 +20,8 @@ services:
       KONG_ADMIN_ERROR_LOG: /dev/stderr
       KONG_ADMIN_LISTEN: 0.0.0.0:8001, 0.0.0.0:8444 ssl
       KONG_PROXY_LISTEN: 0.0.0.0:443 ssl
-      KONG_SSL_CERT: /etc/kong/ssk/fullchain.pem
-      KONG_SSL_CERT_KEY: /etc/kong/ssk/privkey.pem
+      KONG_SSL_CERT: /etc/kong/ssl/fullchain.pem
+      KONG_SSL_CERT_KEY: /etc/kong/ssl/privkey.pem
 
       KONG_DECLARATIVE_CONFIG: /opt/kong/kong.yml
       KONG_LOG_LEVEL: debug
