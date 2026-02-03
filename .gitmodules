@@ -6,10 +6,6 @@
     path = tracking-service
     url = https://github.com/TRACKIO-DELIVERY/tracking-service.git
     branch = main
-[submodule "message-broker"]
-    path = message-broker
-    url = https://github.com/TRACKIO-DELIVERY/message-broker.git
-    branch = main
 [submodule "order-service"]
     path = order-service
     url = https://github.com/TRACKIO-DELIVERY/order-service
