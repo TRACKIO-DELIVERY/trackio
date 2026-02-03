@@ -131,57 +131,21 @@ services:
     networks:
       - api_gateway
 
-  django: &django
+  order-spring:
     build:
       context: order-service
       dockerfile: ./compose/production/django/Dockerfile
-    container_name: order_service_django
-    image: order_service_production_django
+    container_name: order_service_spring
+    image: order_service_production_spring
     restart: always
     depends_on:
       - postgres
-      - redis
     env_file:
       - .env
     networks:
       - api_gateway
       - rabbitmq_net
     command: /start
-
-  redis:
-    container_name: order_service_redis
-    image: docker.io/redis:6
-    restart: always
-    volumes:
-      - production_redis_data:/data
-    networks:
-      - api_gateway
-
-  celeryworker:
-    <<: *django
-
-    container_name: order_service_celeryworker
-    image: order_service_celeryworker
-    restart: always
-    command: /start-celeryworker
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
-      - order_db_production_backups:/backups
-    depends_on:
-      - django
-    networks:
-      - api_gateway
-
-  celerybeat:
-    <<: *django
-    container_name: order_service_celerybeat
-    image: order_service_celerybeat
-    restart: always
-    command: /start-celerybeat
-    depends_on:
-      - django
-    networks:
-      - api_gateway
 
   tracking:
     build:
