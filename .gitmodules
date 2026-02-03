@@ -2,9 +2,9 @@
     path = infra
     url = https://github.com/TRACKIO-DELIVERY/infra.git
     branch = main
-[submodule "tracking-service"]
-    path = tracking-service
-    url = https://github.com/TRACKIO-DELIVERY/tracking-socket-server.git
+[submodule "tracking-socket-server"]
+	path = tracking-socket-server
+	url = https://github.com/TRACKIO-DELIVERY/tracking-socket-server
     branch = main
 [submodule "order-service"]
     path = order-service

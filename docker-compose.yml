@@ -185,7 +185,7 @@ services:
 
   tracking:
     build:
-      context: tracking-service
+      context: tracking-socket-server
       dockerfile: Dockerfile
     container_name: tracking_service
     image: tracking_service_production
