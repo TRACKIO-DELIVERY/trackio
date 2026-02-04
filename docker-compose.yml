@@ -148,6 +148,9 @@ services:
       - POSTGRES_USER=${POSTGRES_USER}
     ports:
       - "5433:5432"
+    volumes:
+      - order_db_production:/var/lib/postgresql/data
+      - order_db_production_backups:/backups
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready", "-U", "${POSTGRES_USER}", "-d", "${POSTGRES_DB}" ]
       interval: 5s
@@ -166,6 +169,17 @@ services:
       - postgres
     env_file:
       - .env
+    networks:
+      - api_gateway
+
+  tracking:
+    build: 
+      context: tracking-socket-server
+    container_name: tracking_socket_server
+    image: tracking_socket_production_server
+    restart: always
+    depends_on:
+      - order-spring
     networks:
       - api_gateway
 
