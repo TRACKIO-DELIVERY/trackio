@@ -72,12 +72,17 @@ jobs:
 
       - name: Deploy to EC2 - SSH 
         run: |
-          ssh -i private-key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << 'EOF'
+          ssh -i private-key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << EOF
             set -e
             cd ~/trackio
 
+            java -version
+            mvn -v
             git pull origin main
             git submodule update --init --recursive
+
+            export JAVA_HOME=/home/ubuntu/.sdkman/candidates/java/current/bin/java
+            export PATH=$JAVA_HOME/bin:/home/ubuntu/.sdkman/candidates/maven/current/bin/mvn/bin:$PATH
 
             cd order-service
             mvn clean package -DskipTests
