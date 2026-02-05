@@ -74,10 +74,14 @@ jobs:
         run: |
           ssh -i private-key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_HOST }} << 'EOF'
             set -e
-            cd ~/trackio_deploy
+            cd ~/trackio
 
             git pull origin main
             git submodule update --init --recursive
+
+            cd order-service
+            mvn clean package -DskipTests
+            cd ..
 
             echo "${{ secrets.ENV_FILE }}" > .env
             echo "Arquivo .env criado com sucesso"
