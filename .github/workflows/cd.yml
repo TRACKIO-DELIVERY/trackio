@@ -81,8 +81,9 @@ jobs:
             git pull origin main
             git submodule update --init --recursive
 
-            export JAVA_HOME=/home/ubuntu/.sdkman/candidates/java/current/bin/java
-            export PATH=$JAVA_HOME/bin:/home/ubuntu/.sdkman/candidates/maven/current/bin/mvn/bin:$PATH
+            export JAVA_HOME=/home/ubuntu/.sdkman/candidates/java/21.0.8-amzn
+            export MAVEN_HOME=/home/ubuntu/.sdkman/candidates/maven/3.9.11
+            export PATH=$JAVA_HOME/bin:$MAVEN_HOME/bin/:$PATH
 
             cd order-service
             mvn clean package -DskipTests
