@@ -92,5 +92,5 @@ jobs:
             echo "${{ secrets.ENV_FILE }}" > .env
             echo "Arquivo .env criado com sucesso"
 
-            docker compose down && docker compose up -d --build
+            docker-compose down && docker-compose up -d --build
           EOF
